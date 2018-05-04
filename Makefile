@@ -8,7 +8,8 @@ docker-build:
 ## Run Tests
 test: docker-build
 	echo "Running Tests"
-	docker run --rm -v /private/$(CURDIR):$(GOPATH) -w $(GOPATH) $(DOCKER_TAG) bash -c "go test -v | go2xunit -output test.xml"
+#	docker run --rm -v /private/$(CURDIR):$(GOPATH) -w $(GOPATH) $(DOCKER_TAG) bash -c "go test -v | go2xunit -output test.xml"
+	docker run --rm -v /private/$(CURDIR):$(GOPATH) -w $(GOPATH) $(DOCKER_TAG) bash -c "go test -v | go-junit-report > test.xml"
 
 bin: docker-build test
 	echo "Making Binary"
